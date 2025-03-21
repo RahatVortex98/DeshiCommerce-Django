@@ -165,5 +165,5 @@ EMAIL_PORT = 587  # Common SMTP port for TLS
 EMAIL_USE_TLS = True  # Use TLS encryption
 
 EMAIL_HOST_USER = 'vortexvault.dev@gmail.com'  # Your email address
-EMAIL_HOST_PASSWORD = 'kvgc awlx ddgx qbut'  # Use an App Password, NOT your actual password
+EMAIL_HOST_PASSWORD = 'sich kaee efxb lmar'  # Use an App Password, NOT your actual password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Default sender email
