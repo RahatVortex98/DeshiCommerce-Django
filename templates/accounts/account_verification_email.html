@@ -1,0 +1,11 @@
+{% autoescape off %}    {# Disables Django's auto-escaping to allow raw HTML (use carefully). #}
+
+Hello {{ user.first_name }},
+
+Thank you for signing up. Please click the link below to activate your account:
+
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %} {# Generates the correct activation link dynamically.#}
+
+If you did not sign up, please ignore this email.
+
+{% endautoescape %}

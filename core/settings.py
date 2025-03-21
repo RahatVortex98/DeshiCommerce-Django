@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -140,3 +141,29 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory where uploaded media f
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+
+
+MESSAGE_TAGS = {
+    messages.ERROR: "danger",
+    
+}
+
+
+LOGIN_URL = 'login'  # Redirects unauthorized users to login page
+
+
+
+#SMTP CONFIG
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # SMTP server (Gmail, Outlook, etc.)
+EMAIL_PORT = 587  # Common SMTP port for TLS
+EMAIL_USE_TLS = True  # Use TLS encryption
+
+EMAIL_HOST_USER = 'vortexvault.dev@gmail.com'  # Your email address
+EMAIL_HOST_PASSWORD = 'kvgc awlx ddgx qbut'  # Use an App Password, NOT your actual password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Default sender email

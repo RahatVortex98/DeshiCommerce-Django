@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+
+    <!-- ============================ COMPONENT REGISTER   ================================= -->
+    <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+        <article class="card-body">
+
+            {% include "partials/alert.html" %}
+
+            <header class="mb-4"><h4 class="card-title">Sign up</h4></header>
+
+            <form method="POST" action="{% url 'register' %}">
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <div class="col form-group">
+                        <label>First Name</label>
+                        {{ form.first_name }}
+                    </div> <!-- form-group end.// -->
+
+                    <div class="col form-group">
+                        <label>Last Name</label>
+                        {{ form.last_name }}
+                    </div> <!-- form-group end.// -->
+                </div> <!-- form-row end.// -->
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    {{ form.email }}
+                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div> <!-- form-group end.// -->
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    {{ form.phone }}
+                </div> <!-- form-group end.// -->
+
+                <div class="form-group">
+                    <label>Create Password</label>
+                    <div class="input-group">
+                        {{ form.password1 }}
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-eye-slash" id="togglePassword1" style="cursor: pointer;"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Repeat Password</label>
+                    <div class="input-group">
+                        {{ form.password2 }}
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-eye-slash" id="togglePassword2" style="cursor: pointer;"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block"> Register </button>
+                </div> <!-- form-group end.// -->
+
+               
+            
+
+                
+            </form>
+        </article><!-- card-body.// -->
+    </div> <!-- card .// -->
+
+    <p class="text-center mt-4">Have an account? <a href="{% url 'login' %}">Log In</a></p>
+    <br><br>
+    <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function togglePasswordVisibility(passwordFieldId, toggleIconId) {
+            const passwordField = document.getElementById(passwordFieldId);
+            const toggleIcon = document.getElementById(toggleIconId);
+    
+            toggleIcon.addEventListener("click", function () {
+                if (passwordField.type === "password") {
+                    passwordField.type = "text";
+                    toggleIcon.classList.remove("fa-eye-slash");
+                    toggleIcon.classList.add("fa-eye");
+                } else {
+                    passwordField.type = "password";
+                    toggleIcon.classList.remove("fa-eye");
+                    toggleIcon.classList.add("fa-eye-slash");
+                }
+            });
+        }
+    
+        togglePasswordVisibility("id_password1", "togglePassword1");
+        togglePasswordVisibility("id_password2", "togglePassword2");
+    });
+    </script>
+    
+    
+
+{% endblock %}
