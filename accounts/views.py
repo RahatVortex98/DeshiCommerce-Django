@@ -1,6 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
+from carts.models import Cart, CartItem
+from carts.views import _cart_id
+from carts.models import CartItem
+
+
 from .models import Account
 from .forms import RegistrationForm
 from django.contrib import messages,auth
@@ -18,7 +23,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from .utils import account_activation_token  # Import custom token generator
 
-from django.contrib.auth.hashers import make_password
+
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
@@ -95,15 +100,38 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
 
         if user is not None:
+            try:
+                # Retrieve cart using session ID
+                cart = Cart.objects.get(cart_id=_cart_id(request))
+                cart_items = CartItem.objects.filter(cart=cart)
+
+                for item in cart_items:
+                    # Check if a cart item with the same product exists for this user
+                    existing_item = CartItem.objects.filter(user=user, product=item.product).first()
+
+                    if existing_item:
+                        existing_item.quantity += item.quantity
+                        existing_item.save()
+                        item.delete()  # Remove duplicate
+                    else:
+                        item.user = user  # Assign user to the item
+                        item.save()
+                
+                # Assign the cart to the user
+                cart.user = user
+                cart.save()
+
+            except Cart.DoesNotExist:
+                pass
+
             auth.login(request, user)
             messages.success(request, "Login successful!")
-            return redirect('home')  # Redirect to home page after login
+            return redirect('home')
         else:
             messages.error(request, "Invalid login credentials. Please try again.")
             return redirect('login')
 
     return render(request, 'accounts/login.html')
-
 
 @login_required(login_url='login')
 def logout(request):
