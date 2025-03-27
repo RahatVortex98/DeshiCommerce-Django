@@ -40,7 +40,7 @@ class Order(models.Model):
     area = models.CharField(max_length=100, blank=True, null=True)  # Made optional
     division = models.CharField(max_length=50, blank=True, null=True)  # Made optional
     order_note = models.TextField(blank=True, null=True)  # Made optional
-    order_total = models.DecimalField(max_digits=10, decimal_places=2)  # Changed from FloatField
+    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)   # Changed from FloatField
     tax = models.DecimalField(max_digits=10, decimal_places=2)  # Changed from FloatField
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='New')
     ip = models.GenericIPAddressField(blank=True, null=True)  # Stores proper IP format

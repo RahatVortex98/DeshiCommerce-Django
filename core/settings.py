@@ -168,3 +168,11 @@ EMAIL_USE_TLS = True  # Use TLS encryption
 EMAIL_HOST_USER = 'vortexvault.dev@gmail.com'  # Your email address
 EMAIL_HOST_PASSWORD = 'sich kaee efxb lmar'  # Use an App Password, NOT your actual password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Default sender email
+
+
+# SSLCommerz Configuration
+SSL_COMMERZ = {
+    'store_id': 'deshi67e2dbaa43836',
+    'store_pass': 'deshi67e2dbaa43836@ssl',
+    'sandbox': True,  # Change to False for production
+}
